@@ -1,0 +1,1 @@
+![](src/com/md/images/1. soru (algoritma).png)

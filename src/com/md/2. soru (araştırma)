@@ -1,0 +1,51 @@
+Çoklu Kalıtım nedir?
+
+Class B ve Class C, Class A'dan türeyen yavru sınıflar. doWork isimli metodu da overwrite etmişler.
+Fakat bir de Class D var. Diyelim ki Class D hem Class B'den hem de Class C'den türemiş. Yani çoklu kalıtım uygulanmış.
+
+![](src/com.md/images/2-soru-resim.jpg "IntelliJ IDEA")
+
+Neden tavsiye edilmez?
+Yukarıdaki senaryoya göre D sınıfı A sınıfındaki aynı method’u override etmeden kullanmaya çalışırsa ne olur B’nin override’ı mı C’nin override’ı mı çalışır?
+
+Java'da böyle bir problem ile karşılabilmemiz mümkün değil, Çünkü Çoklu Kalıtımı Interface’ler üzerinden destekliyor.
+İnterface’ler içerisinde davranışsal olarak herangi bir kod barındırmayan sadece belli method signature’larını barındıran yapılar.
+
+Çoklu Kalıtım gerektiren çoğu yerde interface kullanılarak yapılan Çoklu Kalıtım gerekli çözümleri sağlıyor.
+Sağlamadığı durumlarda da encapsulation, delegation gibi kavramlardan yararlanabiliyoruz.
+
+İnterface sınıfların içindeki metodlar soyuttur dolayısıyla bu tür sınıflardan türetilen alt sınıflar üst sınıfların aynı isimli isimli metodlarını bulundurmak zorundadır,
+böylece hangi metodun hangi işi yapacağı zaten alt sınıfta bellidir. Ancak normal sınıflarda bulunan metodlar soyut olmadığından hangisinin ne iş yapacağı konusu karmaşıklığa yol açar.
+
+
+* Aşağıda yanlış bir örnek verilmiştir bunun nedeni ye metodunu kimin çalıştıracağının belli olmaması
+
+public class Kedi{
+public void ye(){
+System.out.println("Kedi yedi");
+}}
+
+public class Köpek{
+public void ye(){
+System.out.println("köpek yedi");
+}}
+
+public class Hayvan extends Kedi,Köpek{
+public void ye(){
+System.out.println("Kedi yedi");
+}}
+
+* bunun yerine yerine
+
+public interface Kedi{
+public void ye();
+}
+public interface Köpek{
+public void ye();
+}
+public class Hayvan implements Kedi, Köpek{
+public void ye(){
+System.out.println("Kedi yedi");
+}}
+
+* kullanımı doğrudur.

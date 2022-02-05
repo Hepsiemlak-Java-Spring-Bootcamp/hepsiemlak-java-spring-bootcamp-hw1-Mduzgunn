@@ -1,0 +1,27 @@
+package com.md;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Main {
+    public static int palLength(long n) {
+        String s = String.valueOf(n);
+        String r = new StringBuilder(String.valueOf(n)).reverse().toString();
+        System.out.print(n + " "); //zincirdeki bütün değerleri yazdırır
+        if (s.equals(r)) return 0;
+        return 1 + palLength(n + Long.parseLong(r));
+    }
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<Integer>();
+
+        for (int n=10; n<=100; n++) {
+            Main.palLength(n);
+            System.out.println(n +" == "+ palLength(n)); //zincir uzunluğunu yazar
+            list.add(palLength(n));
+        }
+        System.out.println( "\n "+ "en uzun zincir " + Collections.max(list) + " uzunluğunda" ); // en uzun zincirdeki değerlerin sayısınbı verir
+
+    }
+
+}
